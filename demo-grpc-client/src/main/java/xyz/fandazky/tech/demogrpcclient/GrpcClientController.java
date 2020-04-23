@@ -12,7 +12,7 @@ public class GrpcClientController {
     private GrpcClientService grpcClientService;
 
     @RequestMapping("/")
-    public String printMessage(@RequestParam(defaultValue = "Michael") String name) {
+    public String printMessage(@RequestParam(required = false) String name) {
         return grpcClientService.sendMessage(name);
     }
 }

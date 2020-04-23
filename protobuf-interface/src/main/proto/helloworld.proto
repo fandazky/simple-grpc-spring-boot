@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
+
 option java_multiple_files = true;
 option java_package = "xyz.fandazky.tech.demo.grpc.lib";
 option java_outer_classname = "HelloWorldProto";
@@ -19,7 +21,8 @@ message HelloRequest {
         FEMALE = 1;
     }
     Gender gender = 2;
-    repeated string orderIds = 3;
+    google.protobuf.Timestamp orderTime = 3;
+    repeated string orderIds = 4;
 }
 
 // The response message containing the greetings

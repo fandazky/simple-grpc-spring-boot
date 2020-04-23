@@ -15,12 +15,15 @@ public class GrpcClientService {
 
     public String sendMessage(final String name) {
         try {
-            final HelloReply response = this.simpleStub.sayHello(HelloRequest.newBuilder()
-                    .setName(name)
+            HelloRequest.Builder helloRequestOrBuilder = HelloRequest.newBuilder()
                     .setGender(HelloRequest.Gender.MALE)
                     .addOrderIds("001")
-                    .addOrderIds("002")
-                    .build());
+                    .addOrderIds("002");
+
+            if (name != null) {
+                helloRequestOrBuilder.setName(name);
+            }
+            final HelloReply response = this.simpleStub.sayHello(helloRequestOrBuilder.build());
             return response.getMessage();
         } catch (final StatusRuntimeException e) {
             return "FAILED with " + e.getStatus().getCode().name();
